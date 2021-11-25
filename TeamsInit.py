@@ -3,16 +3,15 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import Column, Integer, String, Numeric, MetaData, create_engine
 
-
-
 Base = declarative_base()
+
 class Team(Base):
     __tablename__ = "Teams"
     yearID = Column(Integer, primary_key=True)
     lgID = Column(String(2))
     teamID = Column(String(3), primary_key=True)
     franchID = Column(String(3))
-    divID = Column(String(1)) #may need to be an integer to correspond with div_ID
+    divID = Column(String(1))  # may need to be an integer to correspond with div_ID
     Rank = Column(Integer)
     G = Column(Integer)
     Ghome = Column(Integer)
@@ -63,7 +62,7 @@ class Team(Base):
         self.lgID = emptyStrNone(data[1])
         self.teamID = emptyStrNone(data[2])
         self.franchID = emptyStrNone(data[3])
-        self.divID = emptyStrNone(data[4]) #may need to be an integer to correspond with div_ID
+        self.divID = emptyStrNone(data[4])  # may need to be an integer to correspond with div_ID
         self.Rank = emptyIntNone(data[5])
         self.G = emptyIntNone(data[6])
         self.Ghome = emptyIntNone(data[7])
@@ -109,56 +108,55 @@ class Team(Base):
         self.teamIDretro = emptyStrNone(data[47])
 
 
-def emptyIntNone(str):
-        if str == "":
-            return None
-        else:
-            return int(str)
-
-
-def emptyStrNone(str):
-    if str == "":
+def emptyIntNone(dataStr):
+    if dataStr == "":
         return None
     else:
-        return str
+        return int(dataStr)
 
 
-def emptyFloatNone(str):
-    if str == "":
+def emptyStrNone(dataStr):
+    if dataStr == "":
         return None
     else:
-        return float(str)
+        return dataStr
 
 
-#get database login info
+def emptyFloatNone(dataStr):
+    if dataStr == "":
+        return None
+    else:
+        return float(dataStr)
+
+
+# get database login info
 user = "root"
 pWord = sys.argv[1]
 host = "localhost"
 db = "baseball2"
 
-#configure session
+# configure engine
 engineStr = "mysql+pymysql://" + user + ":" + pWord + "@" + host + ":3306/" + db
 engine = create_engine(engineStr)
 
+# drop all instances of the Teams table, this is only for testing purposes
 Base.metadata.drop_all(engine)
+
+# create an instance of the Teams table
 Base.metadata.create_all(engine)
+
+# configure session
 Session = sessionmaker(bind=engine)
 session = Session()
 
-
-
-
+# open file and skip the first line
 f = open("./baseballdatabank/core/Teams.csv", "r")
 next(f)
-teams = []
 
 for line in f:
+    # insert the team to the table
     session.add(Team(line))
 
+# commit changes and close the connection
 session.commit()
-
-
-
-
-
-
+session.close()
