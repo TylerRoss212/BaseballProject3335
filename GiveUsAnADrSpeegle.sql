@@ -13,7 +13,7 @@ CREATE TABLE Teams (
     Ghome smallint(6),
     W smallint(6),
     L smallint(6),
-   
+    # Caught cheating???
     primary key (year, teamID)
 );
 

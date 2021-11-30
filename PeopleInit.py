@@ -9,7 +9,6 @@ Base = declarative_base()
 
 class Person(Base):
     __tablename__ = "People"
-
     personID = Column(String(9), primary_key=True)
     nameFirst = Column(String(255))
     nameLast = Column(String(255))
