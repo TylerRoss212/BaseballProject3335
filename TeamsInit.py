@@ -2,6 +2,7 @@ import sys
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import Column, Integer, String, Numeric, MetaData, create_engine
+from strFuncs import emptyStrNone, emptyFloatNone, emptyIntNone
 
 Base = declarative_base()
 
@@ -64,25 +65,6 @@ class Team(Base):
         # self.teamIDretro = emptyStrNone(data[47])
 
 
-def emptyIntNone(dataStr):
-    if dataStr == "":
-        return None
-    else:
-        return int(dataStr)
-
-
-def emptyStrNone(dataStr):
-    if dataStr == "":
-        return None
-    else:
-        return dataStr
-
-
-def emptyFloatNone(dataStr):
-    if dataStr == "":
-        return None
-    else:
-        return float(dataStr)
 
 
 # get database login info
