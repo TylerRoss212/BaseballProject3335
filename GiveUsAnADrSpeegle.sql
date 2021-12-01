@@ -5,6 +5,7 @@ USE `GiveUsAnADrSpeegle`;
 DROP TABLE IF EXISTS Teams;
 DROP TABLE IF EXISTS People;
 DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Parks;
 
 CREATE TABLE Teams (
 	year int(11) NOT NULL,
@@ -14,6 +15,7 @@ CREATE TABLE Teams (
     Ghome smallint(6),
     W smallint(6),
     L smallint(6),
+    attendance int(11),
     # Caught cheating???
     primary key (year, teamID)
 );
@@ -47,4 +49,14 @@ CREATE TABLE User (
     favoriteTeam varchar(3),
 
     primary key (username)
+);
+
+CREATE TABLE Parks(
+    parkKey varchar(255) NOT NULL,
+    parkName varchar(255),
+    city varchar(255),
+    state varchar(255),
+    country varchar(255),
+
+    primary key (parkKey)
 );
