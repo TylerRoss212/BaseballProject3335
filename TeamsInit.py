@@ -15,6 +15,7 @@ class Team(Base):
     Ghome = Column(Integer)
     W = Column(Integer)
     L = Column(Integer)
+    attendance = Column(Integer)
 
 
     def __init__(self, line):
@@ -57,7 +58,7 @@ class Team(Base):
         # self.FP = emptyFloatNone(data[39])
         self.name = emptyStrNone(data[40])
         # self.park = emptyStrNone(data[41])
-        # self.attendance = emptyIntNone(data[42])
+        self.attendance = emptyIntNone(data[42])
         # self.BPF = emptyIntNone(data[43])
         # self.PPF = emptyIntNone(data[44])
         # self.teamIDBR = emptyStrNone(data[45])
