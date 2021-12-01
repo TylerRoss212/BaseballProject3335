@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import hashlib
 
 app = Flask(__name__)
 
@@ -10,4 +11,5 @@ def form():
 def dashboard():
     if request.method == 'POST':
         form_data = request.form
+        print(hashlib.sha256(form_data['password'].encode('utf-8')).hexdigest())
         return render_template('dashboard.html', form_data=form_data)
