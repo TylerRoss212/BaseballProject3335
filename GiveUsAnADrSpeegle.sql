@@ -4,6 +4,7 @@ USE `GiveUsAnADrSpeegle`;
 /* Drop tables */
 DROP TABLE IF EXISTS Teams;
 DROP TABLE IF EXISTS People;
+DROP TABLE IF EXISTS User;
 
 CREATE TABLE Teams (
 	year int(11) NOT NULL,
@@ -38,4 +39,12 @@ CREATE TABLE People (
     #salary double,
 
     primary key (personID)
+);
+
+CREATE TABLE User (
+    username varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
+    favoriteTeam varchar(3),
+
+    primary key (username)
 );
