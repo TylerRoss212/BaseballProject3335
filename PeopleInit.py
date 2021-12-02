@@ -53,7 +53,10 @@ class Person(Base):
 
 
 user = "root"
-pWord = sys.argv[1]
+if len(sys.argv) == 1:
+    pWord = ""
+else:
+    pWord = sys.argv[1]
 host = "localhost"
 db = "GiveUsAnADrSpeegle"
 
