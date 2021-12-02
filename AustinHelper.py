@@ -1,9 +1,9 @@
 import sys
 f = open("./GiveUsAnADrSpeegle.sql", "r")
 #print(sys.argv[1])
+members = []
 for line in f:
     if line.startswith("CREATE TABLE " + sys.argv[1]):
-
         while not line.startswith("primary"):
             line = f.readline()
 
@@ -16,6 +16,7 @@ for line in f:
                     break
                 myStr = ""
                 myStr += data[0]
+                members.append("self." + data[0] + " = ")
                 myStr += " = Column("
 
                 typeStr = ""
@@ -45,6 +46,11 @@ for line in f:
                 print(myStr)
 
         print(line)
+
+print()
+
+for member in members:
+    print(member)
 
 print()
 f2 = open("./baseballdatabank/core/" + sys.argv[2], "r")
