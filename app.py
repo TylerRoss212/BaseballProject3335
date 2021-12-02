@@ -3,6 +3,8 @@ import pymysql
 import hashlib
 
 app = Flask(__name__)
+con = pymysql.connect(host='localhost', user='root', password='', database='GiveUsAnADrSpeegle')
+cur = con.cursor()
 
 @app.route('/')
 def form():
@@ -10,9 +12,6 @@ def form():
         
 @app.route('/dashboard', methods=['POST', 'GET'])
 def dashboard():
-    con = pymysql.connect(host='localhost', user='root', password='', database='GiveUsAnADrSpeegle')
-    cur = con.cursor()
-
     if request.method == 'POST':
         form_data = request.form
         #print(hashlib.sha256(form_data['password'].encode('utf-8')).hexdigest())
