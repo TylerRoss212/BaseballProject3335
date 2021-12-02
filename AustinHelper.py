@@ -35,7 +35,7 @@ for line in f:
 
                     typeStr += numStr
                     typeStr += ")"
-                elif data[1].startswith("int"):
+                elif data[1].startswith("int") or data[1].startswith("smallint"):
                     typeStr = "Integer"
                 elif data[1].startswith("double"):
                     typeStr = "Numeric"
