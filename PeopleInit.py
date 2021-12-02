@@ -51,33 +51,33 @@ class Person(Base):
         self.deathCity = emptyStrNone(data[12])
         #self.salary = emptyStrNone(data[])
 
-
-user = "root"
-if len(sys.argv) == 1:
+def initPeopleTable():
+    user = "root"
     pWord = ""
-else:
-    pWord = sys.argv[1]
-host = "localhost"
-db = "GiveUsAnADrSpeegle"
+    host = "localhost"
+    db = "GiveUsAnADrSpeegle"
 
-# configure engine and session
-engineStr = "mysql+pymysql://" + user + ":" + pWord + "@" + host + ":3306/" + db
-engine = create_engine(engineStr)
-Session = sessionmaker(bind=engine)
-session = Session()
+    # configure engine and session
+    engineStr = "mysql+pymysql://" + user + ":" + pWord + "@" + host + ":3306/" + db
+    engine = create_engine(engineStr)
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-# TEST: deletes all data in the table
-session.execute("TRUNCATE TABLE People")
-session.commit()
+    # TEST: deletes all data in the table
+    session.execute("TRUNCATE TABLE People")
+    session.commit()
 
-# open file and skip the first line
-f = open("./baseballdatabank/core/People.csv", "r")
-next(f)
+    # open file and skip the first line
+    f = open("./baseballdatabank/core/People.csv", "r")
+    next(f)
 
-for line in f:
-    # insert the team to the table
-    session.add(Person(line))
+    for line in f:
+        # insert the team to the table
+        session.add(Person(line))
 
-# commit changes and close the connection
-session.commit()
-session.close()
+    # commit changes and close the connection
+    session.commit()
+    session.close()
+
+
+initPeopleTable()

@@ -7,27 +7,30 @@ from strFuncs import emptyIntNone, emptyStrNone, emptyFloatNone
 Base = declarative_base()
 
 
-class Park(Base):
-    __tablename__ = "Parks"
-    parkKey = Column(String(255), primary_key=True)
-    parkName = Column(String(255))
-    city = Column(String(255))
-    state = Column(String(255))
-    country = Column(String(255))
+class WorldSeries(Base):
+    __tablename__ = "WorldSeries"
+    year = Column(Integer, primary_key=True)
+    winner = Column(String(3))
+    loser = Column(String(3))
+    series = Column(String(3))
+
+
+
+
+
+
 
     def __init__(self, line):
         data = line.split(",")
-        self.parkKey = emptyStrNone(data[0])
-        self.parkName = emptyStrNone(data[1])
-        self.city = emptyStrNone(data[3])
-        self.state = emptyStrNone(data[4])
-        self.country = emptyStrNone(data[5])
 
+        self.year = emptyIntNone(data[0])
+        self.winner = emptyStrNone(data[1])
+        self.loser = emptyStrNone(data[2])
+        self.series = emptyStrNone(data[3])
 
-def initParksTable():
+def initWorldSeriesTable():
     user = "root"
     pWord = ""
-
     host = "localhost"
     db = "GiveUsAnADrSpeegle"
 
@@ -38,19 +41,20 @@ def initParksTable():
     session = Session()
 
     # TEST: deletes all data in the table
-    session.execute("TRUNCATE TABLE Parks")
+    session.execute("TRUNCATE TABLE WorldSeries")
     session.commit()
 
     # open file and skip the first line
-    f = open("./baseballdatabank/core/Parks.csv", "r")
+    f = open("./baseballdatabank/core/WorldSeries.csv", "r")
     next(f)
 
     for line in f:
         # insert the team to the table
-        session.add(Park(line))
+        session.add(WorldSeries(line))
 
     # commit changes and close the connection
     session.commit()
     session.close()
 
-initParksTable()
+
+initWorldSeriesTable()

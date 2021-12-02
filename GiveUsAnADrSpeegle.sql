@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS Teams;
 DROP TABLE IF EXISTS People;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Parks;
+DROP TABLE IF EXISTS WorldSeries;
+
 
 CREATE TABLE Teams (
 	year int(11) NOT NULL,
@@ -59,4 +61,13 @@ CREATE TABLE Parks(
     country varchar(255),
 
     primary key (parkKey)
+);
+
+CREATE TABLE WorldSeries(
+    year int(11) NOT NULL,
+    winner char(3),
+    loser char(3),
+    series char(3),
+
+    primary key (year)
 );

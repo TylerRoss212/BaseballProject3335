@@ -67,35 +67,35 @@ class Team(Base):
 
 
 
-
-# get database login info
-user = "root"
-if len(sys.argv) == 1:
+def initTeamsTable():
+    # get database login info
+    user = "root"
     pWord = ""
-else:
-    pWord = sys.argv[1]
 
-host = "localhost"
-db = "GiveUsAnADrSpeegle"
+    host = "localhost"
+    db = "GiveUsAnADrSpeegle"
 
-# configure engine and session
-engineStr = "mysql+pymysql://" + user + ":" + pWord + "@" + host + ":3306/" + db
-engine = create_engine(engineStr)
-Session = sessionmaker(bind=engine)
-session = Session()
+    # configure engine and session
+    engineStr = "mysql+pymysql://" + user + ":" + pWord + "@" + host + ":3306/" + db
+    engine = create_engine(engineStr)
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-# TEST: deletes all data in the table
-session.execute("TRUNCATE TABLE Teams")
-session.commit()
+    # TEST: deletes all data in the table
+    session.execute("TRUNCATE TABLE Teams")
+    session.commit()
 
-# open file and skip the first line
-f = open("./baseballdatabank/core/Teams.csv", "r")
-next(f)
+    # open file and skip the first line
+    f = open("./baseballdatabank/core/Teams.csv", "r")
+    next(f)
 
-for line in f:
-    # insert the team to the table
-    session.add(Team(line))
+    for line in f:
+        # insert the team to the table
+        session.add(Team(line))
 
-# commit changes and close the connection
-session.commit()
-session.close()
+    # commit changes and close the connection
+    session.commit()
+    session.close()
+
+
+initTeamsTable()
