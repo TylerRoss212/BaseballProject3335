@@ -8,7 +8,15 @@ cur = con.cursor()
 
 @app.route('/')
 def form():
+    return render_template('home.html')
+
+@app.route('/signup')
+def signup():
     return render_template('signup.html')
+
+@app.route('/login')
+def signup():
+    return render_template('login.html')
         
 @app.route('/dashboard', methods=['POST', 'GET'])
 def dashboard():
