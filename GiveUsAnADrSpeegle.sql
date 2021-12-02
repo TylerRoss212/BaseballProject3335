@@ -4,7 +4,7 @@ USE `GiveUsAnADrSpeegle`;
 /* Drop tables */
 DROP TABLE IF EXISTS Teams;
 DROP TABLE IF EXISTS People;
-DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Parks;
 
 CREATE TABLE Teams (
@@ -43,7 +43,7 @@ CREATE TABLE People (
     primary key (personID)
 );
 
-CREATE TABLE User (
+CREATE TABLE Users (
     username varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
     favoriteTeam varchar(3),
