@@ -1,21 +1,41 @@
 <p>{{ username }}</p>
 <p>{{ favTeam }}</p>
 
-<form action="/changeFav">
+<form action="/changeFav" method="POST">
+    <label for="teams">Favorite Team:</label>
+
+    <select name="teams" id="teams">
+        {% for team in teams %}
+        <option value="{{ team[1] }}">{{ team[0] }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="hidden" value="{{username}}" name="username"/>
+    <input type="hidden" value="{{password}}" name="password"/>
+
     <p><input type="submit" value="Edit Favorite Team"/></p>
 </form>
 
 <div>
 
-    <label for="years">Select a Year!</label>
+    <form action="/roster" method="POST">
+        <label for="years">Select a Year!</label>
 
-    <select name="years" id="years">
-        {% for year in years %}
-        <option value="{{ year }}">{{ year }}</option>
-        {% endfor %}
-    </select>
+        <select name="years" id="years" onchange="roster(value)">
+            {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
 
-    <button type="submit">Submit</button>
+        <input type="hidden" value = "{{ favTeam }}" name="favTeam">
 
+        <input type="submit" value="Submit"/>
+    </form>
 
 </div>
+
+<script>
+    function roster(year) {
+        console.log(year);
+    }
+</script>
