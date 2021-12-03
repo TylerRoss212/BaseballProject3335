@@ -129,7 +129,7 @@ def roster():
         params.append(favTeam)
 
         try:
-            sql = 'SELECT name, FROM players JOIN people USING (personid) WHERE year=%s AND teamid=%s'
+            sql = 'SELECT name, birthCountry FROM players JOIN people USING (personid) WHERE year=%s AND teamid=%s'
             print(sql)
             cur.execute(sql, params)
 
@@ -142,5 +142,8 @@ def roster():
             con.commit()
 
         results = cur.fetchall()
+        rosterList = []
+        for row in results:
+            rosterList.append(row)
 
-        return render_template('roster.html', year=year, favTeam=favTeam)
+        return render_template('roster.html', year=year, favTeam=favTeam, roster=rosterList)
