@@ -12,7 +12,25 @@ def form():
 
 @app.route('/signup')
 def signup():
-    return render_template('signup.html')
+    try:
+        sql = 'SELECT name FROM teams WHERE year=2020'
+        print(sql)
+        cur.execute(sql)
+    
+    except Exception:
+        con.rollback()
+        print('Error: unable to fetch data')
+        raise
+
+    else:
+        con.commit()
+    
+    finally:
+        con.close()
+
+    teams = cur.fetchall()
+
+    return render_template('signup.html', teams=teams)
 
 @app.route('/signupSuccess', methods=['POST', 'GET'])
 def signupSuccess():
