@@ -14,7 +14,7 @@ def form():
 @app.route('/signup')
 def signup():
     try:
-        sql = 'SELECT name FROM teams WHERE year=2020'
+        sql = 'SELECT name, teamid FROM teams WHERE year=2020'
         print(sql)
         cur.execute(sql)
     
@@ -30,7 +30,7 @@ def signup():
     teamsList = []
     
     for row in teams:
-        teamsList.append(row[0])
+        teamsList.append(row)
 
     return render_template('signup.html', teams=teamsList)
 
@@ -42,9 +42,10 @@ def signupSuccess():
         params = []
         params.append(form_data['username'])
         params.append(hashlib.sha256(form_data['password'].encode('utf-8')).hexdigest())
+        params.append(form_data['teams'])
 
         try:
-            sql = 'INSERT INTO Users (username, password) VALUES (%s, %s)'
+            sql = 'INSERT INTO Users VALUES (%s, %s, %s)'
             print(sql)
             cur.execute(sql, params)
 
@@ -54,8 +55,6 @@ def signupSuccess():
             raise
         else:
             con.commit()
-        finally:
-            con.close()
 
         return render_template('signupSuccess.html')
 
@@ -100,5 +99,3 @@ def dashboard():
             raise
         else:
             con.commit()
-        finally:
-            con.close()

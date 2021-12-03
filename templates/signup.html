@@ -1,5 +1,3 @@
-<h1>{{ teams }}</h1>
-
 <form action="/signupSuccess" method="POST">
     <p>Username <input type="text" name="username"/></p>
     <p>Password <input type="password" name="password"/></p>
@@ -8,31 +6,9 @@
 
     <select name="teams" id="teams">
         {% for team in teams %}
-            <option value="{{ team }}">{{ team }}</option>
+            <option value="{{ team[1] }}">{{ team[0] }}</option>
         {% endfor %}
     </select>
 
-    <p id="msg"></p>
-
     <p><input type="submit" value="Sign Up"/></p>
 </form>
-
-<script>
-    /*
-    // THE JSON ARRAY.
-    var teams = "{{ teams }}";
-
-    var ele = document.getElementById('teams');
-    for (var team in teams) {
-        // POPULATE SELECT ELEMENT WITH JSON.
-        ele.innerHTML = ele.innerHTML +
-            '<option value="' + teams + '">' + teams + '</option>';
-    }
-    */
-    function show(ele) {
-        // GET THE SELECTED VALUE FROM <select> ELEMENT AND SHOW IT.
-        var msg = document.getElementById('msg');
-        msg.innerHTML = 'Selected Bird: <b>' + ele.options[ele.selectedIndex].text + '</b> </br>' +
-            'ID: <b>' + ele.value + '</b>';
-    }
-</script>
