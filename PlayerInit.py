@@ -13,6 +13,7 @@ class Player(Base):
     personID = Column(String(9), primary_key=True)
     year = Column(Integer, primary_key=True)
     stint = Column(Integer, primary_key=True)
+    teamID = Column(String(3))
     battingID = Column(String(22))
     pitchingID = Column(String(22))
     fieldingID = Column(String(22))
@@ -23,6 +24,7 @@ class Player(Base):
         self.personID = data[0]
         self.year = data[1]
         self.stint = data[2]
+        self.teamID = data[3]
         self.battingID = self.personID + "B" + self.year + "-" + self.stint
         self.pitchingID = self.personID + "P" + self.year + "-" + self.stint
         self.fieldingID = self.personID + "F" + self.year + "-" + self.stint

@@ -4,6 +4,8 @@ USE `GiveUsAnADrSpeegle`;
 /* Drop tables */
 DROP TABLE IF EXISTS Teams;
 DROP TABLE IF EXISTS Franchises;
+DROP TABLE IF EXISTS Leagues;
+DROP TABLE IF EXISTS Divisions;
 DROP TABLE IF EXISTS People;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Parks;
@@ -13,6 +15,7 @@ DROP TABLE IF EXISTS Salaries;
 DROP TABLE IF EXISTS BattingStats;
 DROP TABLE IF EXISTS PitchingStats;
 DROP TABLE IF EXISTS FieldingStats;
+
 
 CREATE TABLE Teams (
 	year int(11) NOT NULL,
@@ -34,6 +37,23 @@ CREATE TABLE Franchises (
     NAassoc varchar(3),
 
     primary key (franchId)
+);
+
+CREATE TABLE Leagues (
+    lgID char(2) NOT NULL,
+    leagueName varchar(50),
+    active char(2),
+
+    primary key (lgID)
+);
+
+CREATE TABLE Divisions (
+    divID char(2) NOT NULL,
+    divisionName varchar(50),
+    lgID char(2) NOT NULL,
+    active char(2),
+
+    primary key (divID)
 );
 
 CREATE TABLE People (
@@ -86,6 +106,7 @@ CREATE TABLE WorldSeries(
 CREATE TABLE Players(
     personID varchar(9) NOT NULL,
     year smallint(6) NOT NULL,
+    teamID char(3),
     stint smallint(6) NOT NULL,
     battingID varchar(23),
     pitchingID varchar(23),
