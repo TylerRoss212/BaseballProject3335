@@ -67,13 +67,9 @@ def changeFav():
     if request.method == 'POST':
         form_data = request.form
         changeParam = []
-        print('1')
         changeParam.append(form_data['teams'])
-        print('2')
         changeParam.append(form_data['username'])
-        print('3')
-        print(changeParam[0])
-        print(changeParam[1])
+
         try:
             sql = 'UPDATE Users SET favoriteTeam = %s WHERE username = %s'
             print(sql)
