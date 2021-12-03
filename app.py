@@ -62,10 +62,11 @@ def dashboard():
             passMatch = hashlib.sha256(form_data['password'].encode('utf-8')).hexdigest()
 
             for row in results:
-                if(row == passMatch):
-                    return render_template('dashboard.html', form_data=form_data)
-                else:
-                    alert("BAD")
+                for col in row:
+                    if(col == passMatch):
+                        return render_template('dashboard.html', form_data=form_data)
+                    else:
+                        return render_template('incorrectUserOrPass.html')
 
 
         except Exception:
