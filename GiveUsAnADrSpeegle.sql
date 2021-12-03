@@ -3,11 +3,13 @@ USE `GiveUsAnADrSpeegle`;
 
 /* Drop tables */
 DROP TABLE IF EXISTS Teams;
+DROP TABLE IF EXISTS Franchises;
 DROP TABLE IF EXISTS People;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Parks;
 DROP TABLE IF EXISTS WorldSeries;
 DROP TABLE IF EXISTS Players;
+DROP TABLE IF EXISTS Salaries;
 DROP TABLE IF EXISTS BattingStats;
 DROP TABLE IF EXISTS PitchingStats;
 DROP TABLE IF EXISTS FieldingStats;
@@ -23,6 +25,15 @@ CREATE TABLE Teams (
     attendance int(11),
     # Caught cheating???
     primary key (year, teamID)
+);
+
+CREATE TABLE Franchises (
+    franchID varchar(3) NOT NULL,
+    franchName varchar(50),
+    active char(1),
+    NAassoc varchar(3),
+
+    primary key (franchId)
 );
 
 CREATE TABLE People (
@@ -81,6 +92,16 @@ CREATE TABLE Players(
     fieldingID varchar(23),
 
     primary key (personID, year, stint)
+);
+
+CREATE TABLE Salaries(
+    personID varchar(9) NOT NULL,
+    year smallint(6) NOT NULL,
+    teamID varchar(3) NOT NULL,
+    Salary double,
+
+
+    primary key (personID, year, teamID)
 );
 
 
