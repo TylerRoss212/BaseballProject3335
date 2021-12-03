@@ -74,6 +74,11 @@ def dashboard():
         params.append(form_data['username'])
 
         try:
+
+            sql = "SELECT year FROM Teams GROUP BY year"
+            cur.execute(sql)
+            allYears = cur.fetchall()
+
             sql = "SELECT password FROM Users WHERE username = %s"
             print(sql)
             cur.execute(sql, params)
@@ -84,7 +89,7 @@ def dashboard():
             for row in results:
                 for col in row:
                     if(col == passMatch):
-                        return render_template('dashboard.html', form_data=form_data)
+                        return render_template('dashboard.html', form_data=form_data, allYears=allYears)
                     else:
                         return render_template('incorrectUserOrPass.html')
 
