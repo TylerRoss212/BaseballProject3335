@@ -85,7 +85,7 @@ def dashboard():
 
 
 
-            sql = "SELECT year FROM Teams GROUP BY year"
+            sql = "SELECT year FROM Teams GROUP BY year DESC"
             cur.execute(sql)
             allYears = cur.fetchall()
 
@@ -115,3 +115,32 @@ def dashboard():
             raise
         else:
             con.commit()
+
+@app.route('/roster', methods=['POST']) 
+def roster():
+    if request.method == 'POST':
+        form_data = request.form
+
+        year = form_data['years']
+        favTeam = form_data['favTeam']
+
+        params = []
+        params.append(year)
+        params.append(favTeam)
+
+        try:
+            sql = 'SELECT name, FROM players JOIN people USING (personid) WHERE year=%s AND teamid=%s'
+            print(sql)
+            cur.execute(sql, params)
+
+        except Exception:
+            con.rollback()
+            print("Database Exception")
+            raise
+
+        else:
+            con.commit()
+
+        results = cur.fetchall()
+
+        return render_template('roster.html', year=year, favTeam=favTeam)

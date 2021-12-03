@@ -7,15 +7,24 @@
 
 <div>
 
-    <label for="years">Select a Year!</label>
+    <form action="/roster" method="POST">
+        <label for="years">Select a Year!</label>
 
-    <select name="years" id="years">
-        {% for year in years %}
-        <option value="{{ year }}">{{ year }}</option>
-        {% endfor %}
-    </select>
+        <select name="years" id="years" onchange="roster(value)">
+            {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
 
-    <button type="submit">Submit</button>
+        <input type="hidden" value = "{{ favTeam }}" name="favTeam">
 
+        <input type="submit" value="Submit"/>
+    </form>
 
 </div>
+
+<script>
+    function roster(year) {
+        console.log(year);
+    }
+</script>
