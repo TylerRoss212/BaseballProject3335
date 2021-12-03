@@ -5,6 +5,7 @@ USE `GiveUsAnADrSpeegle`;
 DROP TABLE IF EXISTS Teams;
 DROP TABLE IF EXISTS Franchises;
 DROP TABLE IF EXISTS Leagues;
+DROP TABLE IF EXISTS Divisions;
 DROP TABLE IF EXISTS People;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Parks;
@@ -44,6 +45,15 @@ CREATE TABLE Leagues (
     active char(2),
 
     primary key (lgID)
+);
+
+CREATE TABLE Divisions (
+    divID char(2) NOT NULL,
+    divisionName varchar(50),
+    lgID char(2) NOT NULL,
+    active char(2),
+
+    primary key (divID)
 );
 
 CREATE TABLE People (
@@ -96,6 +106,7 @@ CREATE TABLE WorldSeries(
 CREATE TABLE Players(
     personID varchar(9) NOT NULL,
     year smallint(6) NOT NULL,
+    teamID char(3),
     stint smallint(6) NOT NULL,
     battingID varchar(23),
     pitchingID varchar(23),
