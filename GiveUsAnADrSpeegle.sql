@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS WorldSeries;
 DROP TABLE IF EXISTS Players;
 DROP TABLE IF EXISTS BattingStats;
 DROP TABLE IF EXISTS PitchingStats;
+DROP TABLE IF EXISTS FieldingStats;
 
 CREATE TABLE Teams (
 	year int(11) NOT NULL,
@@ -137,6 +138,26 @@ CREATE TABLE PitchingStats(
     GIDP smallint(6),
 
     primary key (pitchingID)
+);
+
+CREATE TABLE FieldingStats(
+    fieldingID varchar(29) NOT NULL,
+    teamID varchar(3),
+    POS varchar(2) NOT NULL,
+    G smallint(6),
+    GS smallint(6),
+    InnOuts smallint(6),
+    PO smallint(6),
+    A smallint(6),
+    E smallint(6),
+    DP smallint(6),
+    PB smallint(6),
+    WP smallint(6),
+    SB smallint(6),
+    CS smallint(6),
+    ZR double,
+
+    primary key (fieldingID)
 );
 
 
