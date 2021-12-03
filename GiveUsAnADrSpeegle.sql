@@ -30,7 +30,7 @@ CREATE TABLE Teams (
 CREATE TABLE Franchises (
     franchID varchar(3) NOT NULL,
     franchName varchar(50),
-    active char(1),
+    active char(2),
     NAassoc varchar(3),
 
     primary key (franchId)
