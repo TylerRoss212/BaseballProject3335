@@ -1,8 +1,18 @@
 <p>{{ year }}</p>
 <p>{{ favTeam }}</p>
 
-<p>
-    {% for player in roster %}
-        <p>{{ player[0] }} {{ player[1] }} {{ player[2] }} {{ player[3] }} {{ player[4] }}</p>
-    {% endfor %}
-</p>
+<div class="container" display="table">
+    <div class="column" float="left" width=50>
+        <h1>Name</h1>
+        {% for player in roster %}
+            <p>{{ player[0] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" float="left" width=50>
+        <h1>Birth Place</h1>
+        {% for player in roster %}
+            <p>{{ player[1] }}</p>
+        {% endfor %}
+    </div>
+</div>
