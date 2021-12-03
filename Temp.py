@@ -36,11 +36,10 @@ for winner in divWinners:
     res = cur.fetchall()
     print(sys.argv[1], " ", winner[1], " ", winner[2], " Standings")
 
+    print(f"{'Name':<35} {'G':<5} {'Ghome':<5} {'W':<5} {'L':<5} {'Attendance':<11} {'GB':<7}")
+    print('------------------------------------------------------------------------------')
     for row in res:
-        myStr = ""
-        for col in row:
-            myStr += str(col)
-            myStr += ' '
+        myStr = f"{row[0]:<35} {row[1]:<5} {row[2]:<5} {row[3]:<5} {row[4]:<5} {row[5]:<11} {row[6]:<7}"
         print(myStr)
 
     print()
