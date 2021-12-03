@@ -1,11 +1,7 @@
 <div>
-    <label for="teams">Favorite Team:</label>
+    You successfully changed your name!
 
-    <select name="teams" id="teams">
-        {% for team in teams %}
-        <option value="{{ team[1] }}">{{ team[0] }}</option>
-        {% endfor %}
-    </select>
-
-    <p><input type="submit" value="Sign Up"/></p>
-</div>>
+    <form action="/dashboard">
+        <p><input type="submit" value="Back to Dashboard"/></p>
+    </form>
+</div>
