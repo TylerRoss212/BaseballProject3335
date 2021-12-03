@@ -1,7 +1,17 @@
 <p>{{ username }}</p>
 <p>{{ favTeam }}</p>
 
-<form action="/changeFav">
+<form action="/changeFav" method="POST">
+    <label for="teams">Favorite Team:</label>
+
+    <select name="teams" id="teams">
+        {% for team in teams %}
+        <option value="{{ team[1] }}">{{ team[0] }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="hidden" value="{{username}}" name="username"/>
+
     <p><input type="submit" value="Edit Favorite Team"/></p>
 </form>
 

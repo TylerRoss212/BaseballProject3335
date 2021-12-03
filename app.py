@@ -62,10 +62,40 @@ def signupSuccess():
 def login():
     return render_template('login.html')
 
+@app.route('/changeFav', methods=['POST'])
+def changeFav():
+    if request.method == 'POST':
+        form_data = request.form
+        changeParam = []
+        print('1')
+        changeParam.append(form_data['teams'])
+        print('2')
+        changeParam.append(form_data['username'])
+        print('3')
+        print(changeParam[0])
+        print(changeParam[1])
+        sql = 'UPDATE Users SET favoriteTeam = %s WHERE username = %s'
+        print(sql)
+        cur.execute(sql, changeParam)
+
+        username = form_data['username']
+        return render_template('changeFav.html')
         
 @app.route('/dashboard', methods=['POST', 'GET'])
 def dashboard():
+
     if request.method == 'POST':
+
+        sql = 'SELECT name, teamid FROM teams WHERE year=2020'
+        print(sql)
+        cur.execute(sql)
+
+        teams = cur.fetchall()
+        teamsList = []
+
+        for row in teams:
+            teamsList.append(row)
+
 
         form_data = request.form
 
@@ -104,7 +134,7 @@ def dashboard():
             for row in results:
                 for col in row:
                     if(col == passMatch):
-                        return render_template('dashboard.html', username=username, years=yearList, favTeam=favTeam)
+                        return render_template('dashboard.html', username=username, teams=teamsList, years=yearList, favTeam=favTeam)
                     else:
                         return render_template('incorrectUserOrPass.html')
 
