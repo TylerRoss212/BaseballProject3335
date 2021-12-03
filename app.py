@@ -67,13 +67,9 @@ def changeFav():
     if request.method == 'POST':
         form_data = request.form
         changeParam = []
-        print('1')
         changeParam.append(form_data['teams'])
-        print('2')
         changeParam.append(form_data['username'])
-        print('3')
-        print(changeParam[0])
-        print(changeParam[1])
+
         try:
             sql = 'UPDATE Users SET favoriteTeam = %s WHERE username = %s'
             print(sql)
@@ -121,7 +117,17 @@ def dashboard():
             favSQL = cur.fetchall()
 
             for team in favSQL:
-                    favTeam = (team[0])
+                favTeam = (team[0])
+
+
+            sql = "SELECT name FROM Teams WHERE teamID = %s GROUP BY name"
+            tempNameParam = []
+            tempNameParam.append(favTeam)
+            cur.execute(sql, tempNameParam)
+            tempNameSQL = cur.fetchall()
+
+            for team in tempNameSQL:
+                favTeamName = (team[0])
 
 
 
@@ -145,7 +151,7 @@ def dashboard():
             for row in results:
                 for col in row:
                     if(col == passMatch):
-                        return render_template('dashboard.html', username=username, teams=teamsList, years=yearList, favTeam=favTeam, password=password)
+                        return render_template('dashboard.html', username=username, teams=teamsList, years=yearList, favTeam=favTeam, favTeamName=favTeamName, password=password)
                     else:
                         return render_template('incorrectUserOrPass.html')
 
