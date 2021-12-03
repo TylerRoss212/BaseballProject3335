@@ -47,17 +47,26 @@ def login():
 @app.route('/dashboard', methods=['POST', 'GET'])
 def dashboard():
     if request.method == 'POST':
+
         form_data = request.form
-        #print(hashlib.sha256(form_data['password'].encode('utf-8')).hexdigest())
 
         params = []
         params.append(form_data['username'])
-        params.append(hashlib.sha256(form_data['password'].encode('utf-8')).hexdigest())
 
         try:
-            sql = 'INSERT INTO Users (username, password) VALUES (%s, %s)'
+            sql = "SELECT password FROM Users WHERE username = %s"
             print(sql)
             cur.execute(sql, params)
+
+            results = cur.fetchall()
+            passMatch = hashlib.sha256(form_data['password'].encode('utf-8')).hexdigest()
+
+            for row in results:
+                if(row == passMatch):
+                    return render_template('dashboard.html', form_data=form_data)
+                else:
+                    alert("BAD")
+
 
         except Exception:
             con.rollback()
@@ -67,5 +76,3 @@ def dashboard():
             con.commit()
         finally:
             con.close()
-
-        return render_template('dashboard.html', form_data=form_data)
