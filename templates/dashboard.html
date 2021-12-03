@@ -18,6 +18,27 @@
 
 <br></br>
 <br></br>
+
+<h2>Choose year to display standings</h2>
+<div>
+
+    <form action="/standing" method="POST">
+        <label for="years">Select a Year!</label>
+
+        <select name="standings" id="standings" onchange="roster(value)">
+            {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="hidden" value = "{{ favTeam }}" name="favTeam">
+
+        <input type="submit" value="Submit"/>
+    </form>
+
+</div>
+
+<br></br>
 <br></br>
 
 <h2>Choose year to display roster for your favorite team</h2>
