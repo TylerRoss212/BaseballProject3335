@@ -21,12 +21,17 @@ DROP TABLE IF EXISTS Managers;
 CREATE TABLE Teams (
 	year int(11) NOT NULL,
     teamID varchar(3) NOT NULL,
+    franchID varchar(3),
+    lgID varchar(2),
+    divID varchar(3),
     name varchar(50),
     G smallint(6),
     Ghome smallint(6),
     W smallint(6),
     L smallint(6),
     attendance int(11),
+    DivWin char(1),
+    LgWin char(1),
     # Caught cheating???
     primary key (year, teamID)
 );
