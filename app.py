@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import pymysql
 import hashlib
+import json
 
 app = Flask(__name__)
 con = pymysql.connect(host='localhost', user='root', password='', database='GiveUsAnADrSpeegle')
@@ -24,13 +25,14 @@ def signup():
 
     else:
         con.commit()
-    
-    finally:
-        con.close()
 
     teams = cur.fetchall()
+    teamsList = []
+    
+    for row in teams:
+        teamsList.append(row[0])
 
-    return render_template('signup.html', teams=teams)
+    return render_template('signup.html', teams=teamsList)
 
 @app.route('/signupSuccess', methods=['POST', 'GET'])
 def signupSuccess():
