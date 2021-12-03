@@ -61,4 +61,4 @@ def initPlayersTable():
     session.close()
 
 
-initPeopleTable()
+initPlayersTable()
