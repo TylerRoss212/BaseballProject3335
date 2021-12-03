@@ -74,12 +74,22 @@ def changeFav():
         print('3')
         print(changeParam[0])
         print(changeParam[1])
-        sql = 'UPDATE Users SET favoriteTeam = %s WHERE username = %s'
-        print(sql)
-        cur.execute(sql, changeParam)
+        try:
+            sql = 'UPDATE Users SET favoriteTeam = %s WHERE username = %s'
+            print(sql)
+            cur.execute(sql, changeParam)
+
+        except Exception:
+            con.rollback()
+            print("Database Exception")
+            raise
+        else:
+            con.commit()
 
         username = form_data['username']
-        return render_template('changeFav.html')
+        password = form_data['password']
+        
+        return render_template('changeFav.html', username=username, password=password)
         
 @app.route('/dashboard', methods=['POST', 'GET'])
 def dashboard():
@@ -129,12 +139,13 @@ def dashboard():
             cur.execute(sql, params)
 
             results = cur.fetchall()
+            password = form_data['password']
             passMatch = hashlib.sha256(form_data['password'].encode('utf-8')).hexdigest()
 
             for row in results:
                 for col in row:
                     if(col == passMatch):
-                        return render_template('dashboard.html', username=username, teams=teamsList, years=yearList, favTeam=favTeam)
+                        return render_template('dashboard.html', username=username, teams=teamsList, years=yearList, favTeam=favTeam, password=password)
                     else:
                         return render_template('incorrectUserOrPass.html')
 
