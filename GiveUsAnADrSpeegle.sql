@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS Salaries;
 DROP TABLE IF EXISTS BattingStats;
 DROP TABLE IF EXISTS PitchingStats;
 DROP TABLE IF EXISTS FieldingStats;
-
+DROP TABLE IF EXISTS AllStar;
 
 CREATE TABLE Teams (
 	year int(11) NOT NULL,
@@ -49,11 +49,11 @@ CREATE TABLE Leagues (
 
 CREATE TABLE Divisions (
     divID char(2) NOT NULL,
-    divisionName varchar(50),
     lgID char(2) NOT NULL,
+    divisionName varchar(50),
     active char(2),
 
-    primary key (divID)
+    primary key (divID, lgID)
 );
 
 CREATE TABLE People (
@@ -200,6 +200,18 @@ CREATE TABLE FieldingStats(
     ZR double,
 
     primary key (fieldingID)
+);
+
+CREATE TABLE AllStar(
+    peopleID varchar(9) NOT NULL,
+    year smallint(6) NOT NULL,
+    gameNum smallint(6),
+    teamID char(3),
+    lgID char(2),
+    GP smallint(6),
+    startingPos smallint(6),
+
+    primary key (peopleID, year)
 );
 
 

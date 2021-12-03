@@ -5,6 +5,12 @@ from WSInit import initWorldSeriesTable
 from PlayerInit import initPlayersTable
 from BattingInit import initBattingStatsTable
 from PitchingInit import initPitchingStatsTable
+from FieldingInit import initFieldingStatsTable
+from FranchInit import initFranchisesTable
+from DivInit import initDivisionsTable
+from LgInit import initLeaguesTable
+from SalariesInit import initSalariesTable
+from AllStarInit import initAllStarTable
 
 
 
@@ -15,3 +21,9 @@ initWorldSeriesTable()
 initPlayersTable()
 initBattingStatsTable()
 initPitchingStatsTable()
+initFieldingStatsTable()
+initDivisionsTable()
+initFranchisesTable()
+initLeaguesTable()
+initSalariesTable()
+initAllStarTable()
