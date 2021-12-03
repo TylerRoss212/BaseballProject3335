@@ -1,7 +1,4 @@
-{% for key,value in form_data.items() %}
-<h2> {{key}}</h2>
-<p> {{value}}</p>
-{% endfor %}
+<p>{{ username }}</p>
 
 <div>
 
@@ -12,5 +9,7 @@
         <option value="{{ year }}">{{ year }}</option>
         {% endfor %}
     </select>
+
+    <button type="submit">Submit</button>
 
 </div>

@@ -69,8 +69,10 @@ def dashboard():
 
         form_data = request.form
 
+        username = form_data['username']
+
         params = []
-        params.append(form_data['username'])
+        params.append(username)
 
         try:
 
@@ -93,7 +95,7 @@ def dashboard():
             for row in results:
                 for col in row:
                     if(col == passMatch):
-                        return render_template('dashboard.html', form_data=form_data, years=yearList)
+                        return render_template('dashboard.html', username=username, years=yearList)
                     else:
                         return render_template('incorrectUserOrPass.html')
 
