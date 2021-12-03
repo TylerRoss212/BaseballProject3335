@@ -1,0 +1,11 @@
+<div>
+    <label for="teams">Favorite Team:</label>
+
+    <select name="teams" id="teams">
+        {% for team in teams %}
+        <option value="{{ team[1] }}">{{ team[0] }}</option>
+        {% endfor %}
+    </select>
+
+    <p><input type="submit" value="Sign Up"/></p>
+</div>>

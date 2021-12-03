@@ -76,6 +76,15 @@ def dashboard():
 
         try:
 
+            sql = "SELECT favoriteTeam FROM Users WHERE username = %s"
+            cur.execute(sql, params)
+            favSQL = cur.fetchall()
+
+            for team in favSQL:
+                    favTeam = (team[0])
+
+
+
             sql = "SELECT year FROM Teams GROUP BY year"
             cur.execute(sql)
             allYears = cur.fetchall()
@@ -95,7 +104,7 @@ def dashboard():
             for row in results:
                 for col in row:
                     if(col == passMatch):
-                        return render_template('dashboard.html', username=username, years=yearList)
+                        return render_template('dashboard.html', username=username, years=yearList, favTeam=favTeam)
                     else:
                         return render_template('incorrectUserOrPass.html')
 
