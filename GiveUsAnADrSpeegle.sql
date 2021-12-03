@@ -16,16 +16,22 @@ DROP TABLE IF EXISTS BattingStats;
 DROP TABLE IF EXISTS PitchingStats;
 DROP TABLE IF EXISTS FieldingStats;
 DROP TABLE IF EXISTS AllStar;
+DROP TABLE IF EXISTS Managers;
 
 CREATE TABLE Teams (
 	year int(11) NOT NULL,
     teamID varchar(3) NOT NULL,
+    franchID varchar(3),
+    lgID varchar(2),
+    divID varchar(3),
     name varchar(50),
     G smallint(6),
     Ghome smallint(6),
     W smallint(6),
     L smallint(6),
     attendance int(11),
+    DivWin char(1),
+    LgWin char(1),
     # Caught cheating???
     primary key (year, teamID)
 );
@@ -212,6 +218,21 @@ CREATE TABLE AllStar(
     startingPos smallint(6),
 
     primary key (peopleID, year)
+);
+
+CREATE TABLE Managers(
+    personID varchar(9) NOT NULL,
+    year smallint(6) NOT NULL,
+    teamID char(3),
+    lgID char(2),
+    inseason smallint(6),
+    G smallint(6),
+    W smallint(6),
+    L smallint(6),
+    rank smallint(6),
+    plyrMgr char(1),
+
+    primary key (personID, year, teamID)
 );
 
 

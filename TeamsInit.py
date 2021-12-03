@@ -10,25 +10,35 @@ class Team(Base):
     __tablename__ = "Teams"
     year = Column(Integer, primary_key=True)
     teamID = Column(String(3), primary_key=True)
+    franchID = Column(String(3))
+    lgID = Column(String(2))
+    divID = Column(String(1))
+
     name = Column(String(50))
     G = Column(Integer)
     Ghome = Column(Integer)
     W = Column(Integer)
     L = Column(Integer)
     attendance = Column(Integer)
+    DivWin = Column(String(1))
+    LgWin = Column(String(1))
 
 
     def __init__(self, line):
         data = line.split(",")
         self.year = emptyIntNone(data[0])
+        self.lgID = emptyStrNone(data[1])
         self.teamID = emptyStrNone(data[2])
+        self.franchID = emptyStrNone(data[3])
+        self.divID = emptyStrNone(data[4])
         self.G = emptyIntNone(data[6])
         self.Ghome = emptyIntNone(data[7])
         self.W = emptyIntNone(data[8])
         self.L = emptyIntNone(data[9])
 
         # kept in so i dont have to count column names if we want to reuse this lol
-        # self.LgWin = emptyStrNone(data[12])
+        self.DivWin = emptyStrNone(data[10])
+        self.LgWin = emptyStrNone(data[12])
         # self.WSWin = emptyStrNone(data[13])
         # self.R = emptyIntNone(data[14])
         # self.AB = emptyIntNone(data[15])
