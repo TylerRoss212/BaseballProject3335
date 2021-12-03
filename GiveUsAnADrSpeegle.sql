@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS BattingStats;
 DROP TABLE IF EXISTS PitchingStats;
 DROP TABLE IF EXISTS FieldingStats;
 DROP TABLE IF EXISTS AllStar;
+DROP TABLE IF EXISTS Managers;
 
 CREATE TABLE Teams (
 	year int(11) NOT NULL,
@@ -212,6 +213,21 @@ CREATE TABLE AllStar(
     startingPos smallint(6),
 
     primary key (peopleID, year)
+);
+
+CREATE TABLE Managers(
+    personID varchar(9) NOT NULL,
+    year smallint(6) NOT NULL,
+    teamID char(3),
+    lgID char(2),
+    inseason smallint(6),
+    G smallint(6),
+    W smallint(6),
+    L smallint(6),
+    rank smallint(6),
+    plyrMgr char(1),
+
+    primary key (personID, year, teamID)
 );
 
 

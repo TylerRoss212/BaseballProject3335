@@ -11,6 +11,7 @@ from DivInit import initDivisionsTable
 from LgInit import initLeaguesTable
 from SalariesInit import initSalariesTable
 from AllStarInit import initAllStarTable
+from ManagersInit import initManagersTable
 
 
 
@@ -27,3 +28,4 @@ initFranchisesTable()
 initLeaguesTable()
 initSalariesTable()
 initAllStarTable()
+initManagersTable()
