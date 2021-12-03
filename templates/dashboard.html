@@ -5,39 +5,12 @@
 
 <div>
 
-    <label for="years">Choose a year:</label>
+    <label for="years">Select a Year!</label>
 
     <select name="years" id="years">
-        <option value="2021">2021</option>
-        <option value="2020">2020</option>
+        {% for year in years %}
+        <option value="{{ year }}">{{ year }}</option>
+        {% endfor %}
     </select>
 
-    <h1>{{allYears}}</h1>
-
-    <select name="owner">
-        <?php
-
-$conn = new mysqli('localhost', 'root', '', 'GiveUsAnADrSpeegle')
-or die ('Cannot connect to db');
-
-    $result = $conn->query("select id, name from table");
-
-        echo "<html>";
-    echo "<body>";
-    echo "<select name='id'>";
-
-        while ($row = $result->fetch_assoc()) {
-
-        unset($id, $name);
-        $id = $row['id'];
-        $name = $row['name'];
-        echo '<option value="'.$id.'">'.$name.'</option>';
-
-        }
-
-        echo "</select>";
-    echo "</body>";
-    echo "</html>";
-        ?>
-    </select>
 </div>

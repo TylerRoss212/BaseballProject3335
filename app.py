@@ -78,6 +78,11 @@ def dashboard():
             cur.execute(sql)
             allYears = cur.fetchall()
 
+            yearList = []
+
+            for year in allYears:
+                    yearList.append(year[0])
+
             sql = "SELECT password FROM Users WHERE username = %s"
             print(sql)
             cur.execute(sql, params)
@@ -88,7 +93,7 @@ def dashboard():
             for row in results:
                 for col in row:
                     if(col == passMatch):
-                        return render_template('dashboard.html', form_data=form_data, allYears=allYears)
+                        return render_template('dashboard.html', form_data=form_data, years=yearList)
                     else:
                         return render_template('incorrectUserOrPass.html')
 
