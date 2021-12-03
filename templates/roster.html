@@ -1,18 +1,41 @@
 <p>{{ year }}</p>
 <p>{{ favTeam }}</p>
 
-<div class="container" display="table">
-    <div class="column" float="left" width=50>
+<p>{{ displayString }}</p>
+
+<table style="width: fit-content;">
+    <div class="column" style="width: 200px; float:left; margin:10px">
         <h1>Name</h1>
-        {% for player in roster %}
+        {% for player in rosterList %}
             <p>{{ player[0] }}</p>
-        {% endfor %}
+        {% endfor %}     
     </div>
 
-    <div class="column" float="left" width=50>
+    <div class="column" style="width: 400px; float:left; margin:10px">
         <h1>Birth Place</h1>
-        {% for player in roster %}
+        {% for player in rosterList %}
             <p>{{ player[1] }}</p>
-        {% endfor %}
+        {% endfor %}     
     </div>
-</div>
+
+    <div class="column" style="width: 150px; float:left; margin:10px">
+        <h1>Is Batter</h1>
+        {% for player in rosterList %}
+            <p>{{ player[2] }}</p>
+        {% endfor %}     
+    </div>
+
+    <div class="column" style="width: 150px; float:left; margin:10px">
+        <h1>Is Pitcher</h1>
+        {% for player in rosterList %}
+            <p>{{ player[3] }}</p>
+        {% endfor %}     
+    </div>
+
+    <div class="column" style="width: 50px; float:left; margin:10px">
+        <h1>Age</h1>
+        {% for player in rosterList %}
+            <p>{{ player[4] }}</p>
+        {% endfor %}     
+    </div>
+</table>
