@@ -2,5 +2,7 @@
 <p>{{ favTeam }}</p>
 
 <p>
-    
+    {% for player in roster %}
+        <p>{{ player[0] }} {{ player[1] }} {{ player[2] }} {{ player[3] }} {{ player[4] }}</p>
+    {% endfor %}
 </p>

@@ -88,7 +88,7 @@ def changeFav():
 
         username = form_data['username']
         password = form_data['password']
-        
+
         return render_template('changeFav.html', username=username, password=password)
         
 @app.route('/dashboard', methods=['POST', 'GET'])
@@ -170,7 +170,7 @@ def roster():
         params.append(favTeam)
 
         try:
-            sql = 'SELECT name, birthCountry FROM players JOIN people USING (personid) WHERE year=%s AND teamid=%s'
+            sql = "SELECT CONCAT(nameFirst, ' ', nameLast) as name, CONCAT(birthCountry, ', ', birthState, ', ', birthCity) as birthPlace, CASE WHEN bs.AB IS NULL THEN 'N' WHEN bs.AB = 0 THEN 'N' ELSE 'Y' END as batting, CASE WHEN ps.G IS NULL THEN 'N' WHEN ps.G = 0 THEN 'N' ELSE 'Y' END as pitching, CASE WHEN COALESCE(EXTRACT(MONTH FROM deathDate), EXTRACT(MONTH FROM now())) - EXTRACT(MONTH FROM birthDate) < 0 THEN COALESCE(EXTRACT(YEAR FROM deathDate), EXTRACT(YEAR FROM now())) - EXTRACT(YEAR FROM birthDate) - 1 WHEN COALESCE(EXTRACT(MONTH FROM deathDate), EXTRACT(MONTH FROM now())) - EXTRACT(MONTH FROM birthDate) > 0 THEN COALESCE(EXTRACT(YEAR FROM deathDate), EXTRACT(YEAR FROM now())) - EXTRACT(YEAR FROM birthDate) ELSE CASE WHEN COALESCE(EXTRACT(DAY FROM deathDate), EXTRACT(DAY FROM now())) - EXTRACT(DAY FROM birthDate) >= 0 THEN COALESCE(EXTRACT(YEAR FROM deathDate), EXTRACT(YEAR FROM now())) - EXTRACT(YEAR FROM birthDate) ELSE COALESCE(EXTRACT(YEAR FROM deathDate), EXTRACT(YEAR FROM now())) - EXTRACT(YEAR FROM birthDate) - 1 END END AS Age FROM players p JOIN people USING (personid) LEFT JOIN battingstats bs USING (battingID) LEFT JOIN pitchingstats ps USING (pitchingID) WHERE p.year=%s AND p.teamid=%s"
             print(sql)
             cur.execute(sql, params)
 
