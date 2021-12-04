@@ -1,1 +1,80 @@
 <p>Search for "{{ year }}"</p>
+
+<br/>
+<br/>
+
+{% for i in range(0, num) %}
+
+    <h1 style="color: darkmagenta">{{ headers[i] }}</h1>
+
+        <table style="width: fit-content;">
+            <div class="column" style="width: fit-content; float: left; margin: 10px">
+                <h1>Name</h1>
+                {% for thing in tables[i] %}
+                <p>{{ thing[0] }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="column" style="width: fit-content; float: left; margin: 10px">
+                <h1>G</h1>
+                {% for thing in tables[i] %}
+                <p>{{ thing[1] }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="column" style="width: fit-content; float: left; margin: 10px">
+                <h1>Ghome</h1>
+                {% for thing in tables[i] %}
+                <p>{{ thing[2] }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="column" style="width: fit-content; float: left; margin: 10px">
+                <h1>W</h1>
+                {% for thing in tables[i] %}
+                <p>{{ thing[3] }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="column" style="width: fit-content; float: left; margin: 10px">
+                <h1>L</h1>
+                {% for thing in tables[i] %}
+                <p>{{ thing[4] }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="column" style="width: fit-content; float: left; margin: 10px">
+                <h1>Attendance</h1>
+                {% for thing in tables[i] %}
+                <p>{{ thing[5] }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="column" style="width: fit-content; float: left; margin: 10px">
+                <h1>GB</h1>
+                {% for thing in tables[i] %}
+                <p>{{ thing[6] }}</p>
+                {% endfor %}
+            </div>
+
+        </table>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+{% endfor %}

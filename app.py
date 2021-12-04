@@ -182,14 +182,14 @@ def dashboard():
 #Roster standings
 @app.route('/standing', methods=['POST'])
 def standing():
-    print('1')
+
     if request.method == 'POST':
-        print('2')
+
         form_data = request.form
-        print('2')
+
         #Fetch data from forms
         year = form_data['years']
-        print('4')
+
         params = []
         params.append(year)
 
@@ -215,9 +215,39 @@ def standing():
                 myStr += str(col)
                 myStr += ' '
 
-                divWinners.append((row[0], row[2], row[3], row[4], row[5]))
+            divWinners.append((row[0], row[2], row[3], row[4], row[5]))
 
-        return render_template('standing.html', year=year, divWinners=divWinners)
+
+        searchList = []
+        tables = []
+        headers = []
+        num = 0
+
+        for winner in divWinners:
+
+            num += 1
+
+            subList = []
+
+            divSql = "select name, G, Ghome, W, L, attendance, (((%s - W) + (L - %s)) / 2) as GB from teams where year = %s and lgID = %s and divId = %s ORDER BY GB ASC;"
+            params = []
+            params.append(winner[3])
+            params.append(winner[4])
+            params.append(year)
+            params.append(winner[1])
+            params.append(winner[2])
+
+            cur.execute(divSql, params)
+            res = cur.fetchall()
+            headers.append(year + " " + winner[1] + " " + winner[2] + " Standings" + "\n")
+
+            for row in res:
+                subList.append(row)
+
+            tables.append(subList)
+
+
+        return render_template('standing.html', year=year, tables=tables, headers=headers, num=num)
 
 #Roster render
 @app.route('/roster', methods=['POST']) 
