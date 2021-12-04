@@ -5,7 +5,7 @@
 
 <br></br>
 
-<h2>Current Favorite Team: {{ favTeamName }}</h2>
+<h2>Current Favorite Team: <i style="color: blue">{{ favTeamName }}</i></h2>
 
 <form action="/changeFav" method="POST">
     <label for="teams">Edit Favorite Team:</label>
@@ -25,7 +25,7 @@
 <br></br>
 <br></br>
 
-<h2>Choose year to display standings</h2>
+<h2><u>Choose year to display standings</u></h2>
 <div>
 
     <form action="/standing" method="POST">
@@ -45,7 +45,7 @@
 <br></br>
 <br></br>
 
-<h2>Choose year to display roster for your favorite team</h2>
+<h2><u>Choose year to display roster for your favorite team</u></h2>
 <div>
 
     <form action="/roster" method="POST">
@@ -67,7 +67,17 @@
 <br/>
 <br/>
 
-<h2>Search for a batter by name</h2>
+<h2><u>Look at current list of cheaters :)</u></h2>
+<div>
+    <form action="/cheaters" method="POST">
+        <p><input type="submit" value="Go to Cheaters"/></p>
+    </form>
+</div>
+
+<br/>
+<br/>
+
+<h2><u>Search for a batter by name</u></h2>
 <div>
     <form action="/searchBatters" method="POST">
         <label for="search">Search:</label>
@@ -81,7 +91,7 @@
 <br/>
 <br/>
 
-<h2>Search for a pitcher by name</h2>
+<h2><u>Search for a pitcher by name</u></h2>
 <div>
     <form action="/searchPitchers" method="POST">
         <label for="search">Search:</label>

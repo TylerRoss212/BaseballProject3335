@@ -181,6 +181,23 @@ def dashboard():
 
         return render_template('incorrectUserOrPass.html')
 
+
+#cheater standings
+@app.route('/cheaters', methods=['POST'])
+def cheaters():
+    if request.method == 'POST':
+
+        sql = "SELECT t.name, t.year, c.description FROM CaughtCheating c NATURAL JOIN Teams t"
+        cur.execute(sql)
+        res = cur.fetchall()
+
+        cheatersList = []
+
+        for thing in res:
+            cheatersList.append(thing)
+
+        return render_template('cheaters.html', cheatersList=cheatersList)
+
 #Roster standings
 @app.route('/standing', methods=['POST'])
 def standing():
@@ -197,7 +214,12 @@ def standing():
 
         try:
             #Execute roster fetch based on year and fav team
-            sql = "select teamid, name, lgId, divId, W, L from teams where year = %s and divWin = 'Y'"
+            if(int(year) > 1968):
+                sql = "select teamid, name, lgId, divId, W, L from teams where year = %s and divWin = 'Y'"
+            else:
+                sql = "select teamid, name, lgId, divId, W, L from teams where year = %s and lgWin = 'Y'"
+
+
             cur.execute(sql, params)
 
         except Exception:
@@ -231,25 +253,90 @@ def standing():
 
             subList = []
 
-            divSql = "select name, G, Ghome, W, L, attendance, (((%s - W) + (L - %s)) / 2) as GB from teams where year = %s and lgID = %s and divId = %s ORDER BY GB ASC;"
-            params = []
-            params.append(winner[3])
-            params.append(winner[4])
-            params.append(year)
-            params.append(winner[1])
-            params.append(winner[2])
+            if(int(year) > 1968):
+                divSql = "select name, G, Ghome, W, L, attendance, (((%s - W) + (L - %s)) / 2) as GB from teams where year = %s and lgID = %s and divId = %s ORDER BY GB ASC;"
 
-            cur.execute(divSql, params)
-            res = cur.fetchall()
-            headers.append(year + " " + winner[1] + " " + winner[2] + " Standings" + "\n")
+                params = []
+                params.append(winner[3])
+                params.append(winner[4])
+                params.append(year)
+                params.append(winner[1])
+                params.append(winner[2])
+
+                cur.execute(divSql, params)
+                res = cur.fetchall()
+                headers.append(year + " " + winner[1] + " " + winner[2] + " Standings" + "\n")
+
+            else:
+                divSql = "select name, G, Ghome, W, L, attendance, (((%s - W) + (L - %s)) / 2) as GB from teams where year = %s and lgID = %s ORDER BY GB ASC;"
+
+                params = []
+                params.append(winner[3])
+                params.append(winner[4])
+                params.append(year)
+                params.append(winner[1])
+
+                cur.execute(divSql, params)
+                res = cur.fetchall()
+                headers.append(year + " " + winner[1] + " " + " Standings" + "\n")
+
+
 
             for row in res:
                 subList.append(row)
 
             tables.append(subList)
 
+        lgWinnerParams = []
+        lgWinnerParams.append(year)
+        sql = "SELECT name, lgID FROM Teams WHERE lgWin='Y' AND year = %s"
+        cur.execute(sql, lgWinnerParams)
+        lgWinRes = cur.fetchall()
 
-        return render_template('standing.html', year=year, tables=tables, headers=headers, num=num)
+        lgWinners = []
+
+        for thing in lgWinRes:
+            lgWinners.append(thing)
+
+        wsResults = []
+
+        if(int(year) >= 1903 and int(year) != 1904 and int(year) != 1994):
+            wsWinnerParams = []
+            wsWinnerParams.append(year)
+            sql = "SELECT winner, loser, series FROM WorldSeries WHERE year = %s"
+            cur.execute(sql, wsWinnerParams)
+            wsWinRes = cur.fetchall()
+
+            for thing in wsWinRes:
+                winner = thing[0]
+                loser = thing[1]
+                series = thing[2]
+
+            #Based on winner ID, find teamName
+            tempNameParam = []
+            tempNameParam.append(winner)
+            sql = "SELECT name FROM Teams WHERE teamID = %s GROUP BY name"
+            cur.execute(sql, tempNameParam)
+            tempNameSQL = cur.fetchall()
+
+            for team in tempNameSQL:
+                winner = (team[0])
+
+            #Based on loser ID, find teamName
+            tempNameParam = []
+            tempNameParam.append(loser)
+            sql = "SELECT name FROM Teams WHERE teamID = %s GROUP BY name"
+            cur.execute(sql, tempNameParam)
+            tempNameSQL = cur.fetchall()
+
+            for team in tempNameSQL:
+                loser = (team[0])
+
+            wsResults.append(winner)
+            wsResults.append(loser)
+            wsResults.append(series)
+
+        return render_template('standing.html', year=year, tables=tables, headers=headers, num=num, lgWinners=lgWinners, wsResults=wsResults)
 
 #Roster render
 @app.route('/roster', methods=['POST']) 
