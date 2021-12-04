@@ -12,6 +12,7 @@ from LgInit import initLeaguesTable
 from SalariesInit import initSalariesTable
 from AllStarInit import initAllStarTable
 from ManagersInit import initManagersTable
+from CheatingInit import initCaughtCheatingTable
 
 
 
@@ -29,3 +30,4 @@ initLeaguesTable()
 initSalariesTable()
 initAllStarTable()
 initManagersTable()
+initCaughtCheatingTable()
