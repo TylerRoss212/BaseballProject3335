@@ -22,6 +22,7 @@ for row in res:
     divWinners.append((row[0], row[2], row[3], row[4], row[5]))
     #print(myStr)
 
+displayString = ""
 
 for winner in divWinners:
     divSql = "select name, G, Ghome, W, L, attendance, (((%s - W) + (L - %s)) / 2) as GB from teams where year = %s and lgID = %s and divId = %s ORDER BY GB ASC;"
@@ -34,12 +35,12 @@ for winner in divWinners:
 
     cur.execute(divSql, params)
     res = cur.fetchall()
-    print(sys.argv[1], " ", winner[1], " ", winner[2], " Standings")
+    displayString += sys.argv[1] + " " + winner[1] + " " + winner[2] + " Standings" + "\n"
 
-    print(f"{'Name':<35} {'G':<5} {'Ghome':<5} {'W':<5} {'L':<5} {'Attendance':<11} {'GB':<7}")
-    print('------------------------------------------------------------------------------')
+    displayString += f"{'Name':<35} {'G':<5} {'Ghome':<5} {'W':<5} {'L':<5} {'Attendance':<11} {'GB':<7}" + "\n"
+    displayString += '------------------------------------------------------------------------------' + "\n"
     for row in res:
         myStr = f"{row[0]:<35} {row[1]:<5} {row[2]:<5} {row[3]:<5} {row[4]:<5} {row[5]:<11} {row[6]:<7}"
-        print(myStr)
+        displayString += myStr + '\n'
 
-    print()
+    print(displayString)

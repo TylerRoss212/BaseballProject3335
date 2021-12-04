@@ -1,0 +1,195 @@
+<p>Search for "{{ search }}"</p>
+
+<br/>
+<br/>
+
+<table style="width: fit-content; overflow-x: scroll;">
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>Name</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[0] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>W</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[1] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>L</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[2] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>G</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[3] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>GS</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[4] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>CG</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[5] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>SHO</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[6] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>SV</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[7] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>IPouts</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[8] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>H</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[9] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>ER</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[10] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>HR</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[11] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>BB</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[12] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>SO</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[13] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>BAOpp</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[14] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>ERA</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[15] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>IBB</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[16] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>WP</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[17] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>HBP</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[18] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>BK</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[19] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>BFP</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[20] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>GF</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[21] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>R</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[22] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>SH</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[23] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>SF</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[24] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>GIDP</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[25] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>Year</h1>
+        {% for pitcher in searchList %}
+            <p>{{ pitcher[26] }}</p>
+        {% endfor %}
+    </div>
+</table>
