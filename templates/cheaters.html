@@ -1,0 +1,26 @@
+<h1 style="color: darkmagenta">Cheaters List!!!</h1>
+
+<br/>
+
+<table style="width: fit-content; overflow-x: scroll;">
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>Team Name</h1>
+        {% for thing in cheatersList %}
+        <p>{{ thing[0] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>Year</h1>
+        {% for thing in cheatersList %}
+        <p>{{ thing[1] }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="column" style="width: fit-content; float: left; margin: 10px">
+        <h1>Description</h1>
+        {% for thing in cheatersList %}
+        <p>{{ thing[2] }}</p>
+        {% endfor %}
+    </div>
+</table>

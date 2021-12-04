@@ -1,4 +1,20 @@
-<h1>"{{ year }}" Standings</h1>
+<h1>Total {{ year }} Standings</h1>
+
+<br/>
+<br/>
+
+<h2 style="color: darkmagenta">{{ year }} World Series</h2>
+<h3>Winner: <i style="color: green">{{wsResults[0]}}</i></h3>
+<h3>Loser: <i style="color: red">{{wsResults[1]}}</i></h3>
+<h3>Series: <i style="color: blue">{{wsResults[2]}}</i></h3>
+
+<br/>
+<br/>
+
+<h2 style="color: darkmagenta">League Winners</h2>
+{% for winner in lgWinners %}
+<h3>Winner for the <u>{{winner[1]}}</u> League: <i style="color: red">{{winner[0]}}</i></h3>
+{% endfor %}
 
 <br/>
 <br/>
@@ -8,74 +24,85 @@
     <h2 style="color: darkmagenta">{{ headers[i] }}</h2>
     <h3 style="color: blue">Winner: {{ tables[i][0][0] }}</h3>
 
-        <table style="width: fit-content;">
-            <div class="column" style="width: fit-content; float: left; margin: 10px">
-                <h1>Name</h1>
-                {% for thing in tables[i] %}
-                <p>{{ thing[0] }}</p>
-                {% endfor %}
-            </div>
+    <table style="width: fit-content;">
 
-            <div class="column" style="width: fit-content; float: left; margin: 10px">
-                <h1>G</h1>
-                {% for thing in tables[i] %}
-                <p>{{ thing[1] }}</p>
-                {% endfor %}
-            </div>
+        <div class="column" style="width: fit-content; float: left; margin: 10px">
+            <h1>Name</h1>
+            {% for thing in tables[i] %}
+            <p>{{ thing[0] }}</p>
+            {% endfor %}
+        </div>
 
-            <div class="column" style="width: fit-content; float: left; margin: 10px">
-                <h1>Ghome</h1>
-                {% for thing in tables[i] %}
-                <p>{{ thing[2] }}</p>
-                {% endfor %}
-            </div>
+        <div class="column" style="width: fit-content; float: left; margin: 10px">
+            <h1>G</h1>
+            {% for thing in tables[i] %}
+            <p>{{ thing[1] }}</p>
+            {% endfor %}
+        </div>
 
-            <div class="column" style="width: fit-content; float: left; margin: 10px">
-                <h1>W</h1>
-                {% for thing in tables[i] %}
-                <p>{{ thing[3] }}</p>
-                {% endfor %}
-            </div>
+        <div class="column" style="width: fit-content; float: left; margin: 10px">
+            <h1>Ghome</h1>
+            {% for thing in tables[i] %}
+            <p>{{ thing[2] }}</p>
+            {% endfor %}
+        </div>
 
-            <div class="column" style="width: fit-content; float: left; margin: 10px">
-                <h1>L</h1>
-                {% for thing in tables[i] %}
-                <p>{{ thing[4] }}</p>
-                {% endfor %}
-            </div>
+        <div class="column" style="width: fit-content; float: left; margin: 10px">
+            <h1>W</h1>
+            {% for thing in tables[i] %}
+            <p>{{ thing[3] }}</p>
+            {% endfor %}
+        </div>
 
-            <div class="column" style="width: fit-content; float: left; margin: 10px">
-                <h1>Attendance</h1>
-                {% for thing in tables[i] %}
-                <p>{{ thing[5] }}</p>
-                {% endfor %}
-            </div>
+        <div class="column" style="width: fit-content; float: left; margin: 10px">
+            <h1>L</h1>
+            {% for thing in tables[i] %}
+            <p>{{ thing[4] }}</p>
+            {% endfor %}
+        </div>
 
-            <div class="column" style="width: fit-content; float: left; margin: 10px">
-                <h1>GB</h1>
-                {% for thing in tables[i] %}
-                <p>{{ thing[6] }}</p>
-                {% endfor %}
-            </div>
+        <div class="column" style="width: fit-content; float: left; margin: 10px">
+            <h1>Attendance</h1>
+            {% for thing in tables[i] %}
+            <p>{{ thing[5] }}</p>
+            {% endfor %}
+        </div>
 
-        </table>
+        <div class="column" style="width: fit-content; float: left; margin: 10px">
+            <h1>GB</h1>
+            {% for thing in tables[i] %}
+            <p>{{ thing[6] }}</p>
+            {% endfor %}
+        </div>
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+    </table>
 
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 
 {% endfor %}
