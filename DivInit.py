@@ -4,9 +4,15 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import Column, Integer, String, Numeric, MetaData, create_engine
 from strFuncs import emptyIntNone, emptyStrNone, emptyFloatNone
 import pymysql
+import CSI3335Fall2021 as cfg
 
 def initDivisionsTable():
-    con = pymysql.connect(host='localhost', user='root', password='', database='GiveUsAnADrSpeegle')
+    user = cfg.mysql["user"]
+    pWord = cfg.mysql["password"]
+    host = cfg.mysql["host"]
+    db = cfg.mysql["db"]
+
+    con = pymysql.connect(host=host, user=user, password=pWord, database=db)
     cur = con.cursor()
 
     # TEST: deletes all data in the table
