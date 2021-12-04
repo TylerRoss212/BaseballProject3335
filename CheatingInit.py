@@ -36,11 +36,11 @@ def initCaughtCheatingTable():
     session = Session()
 
     # TEST: deletes all data in the table
-    session.execute("TRUNCATE TABLE CaughtCheatings")
+    session.execute("TRUNCATE TABLE CaughtCheating")
     session.commit()
 
     # open file and skip the first line
-    f = open("./baseballdatabank/core/caughtCheatings.csv", "r")
+    f = open("./baseballdatabank/core/caughtCheating.csv", "r")
     next(f)
 
     for line in f:
