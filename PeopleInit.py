@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import Column, Integer, String, Numeric, create_engine, Date
 from strFuncs import *
+import CSI3335Fall2021 as cfg
 
 Base = declarative_base()
 
@@ -71,10 +72,10 @@ class Person(Base):
         #self.salary = emptyStrNone(data[])
 
 def initPeopleTable():
-    user = "root"
-    pWord = ""
-    host = "localhost"
-    db = "GiveUsAnADrSpeegle"
+    user = cfg.mysql["user"]
+    pWord = cfg.mysql["password"]
+    host = cfg.mysql["host"]
+    db = cfg.mysql["db"]
 
     # configure engine and session
     engineStr = "mysql+pymysql://" + user + ":" + pWord + "@" + host + ":3306/" + db

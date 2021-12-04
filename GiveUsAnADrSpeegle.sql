@@ -235,4 +235,12 @@ CREATE TABLE Managers(
     primary key (personID, year, teamID)
 );
 
+CREATE TABLE CaughtCheating(
+    teamID varchar(9) NOT NULL,
+    year smallint(6) NOT NULL,
+    description varchar(255),
+
+    primary key (teamID, year)
+);
+
 

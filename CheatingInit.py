@@ -8,24 +8,22 @@ import CSI3335Fall2021 as cfg
 Base = declarative_base()
 
 
-class Park(Base):
-    __tablename__ = "Parks"
-    parkKey = Column(String(255), primary_key=True)
-    parkName = Column(String(255))
-    city = Column(String(255))
-    state = Column(String(255))
-    country = Column(String(255))
+class CaughtCheating(Base):
+    __tablename__ = "CaughtCheating"
+    franchID = Column(String(3), primary_key=True)
+    franchName = Column(String(50))
+    active = Column(String(1))
+    NAassoc = Column(String(3))
 
     def __init__(self, line):
         data = line.split(",")
-        self.parkKey = emptyStrNone(data[0])
-        self.parkName = emptyStrNone(data[1])
-        self.city = emptyStrNone(data[3])
-        self.state = emptyStrNone(data[4])
-        self.country = emptyStrNone(data[5])
+        self.franchID = emptyStrNone(data[0])
+        self.franchName = emptyStrNone(data[1])
+        self.active = emptyStrNone(data[2])
+        self.NAassoc = emptyStrNone(data[3])
 
 
-def initParksTable():
+def initCaughtCheatingTable():
     user = cfg.mysql["user"]
     pWord = cfg.mysql["password"]
     host = cfg.mysql["host"]
@@ -38,19 +36,19 @@ def initParksTable():
     session = Session()
 
     # TEST: deletes all data in the table
-    session.execute("TRUNCATE TABLE Parks")
+    session.execute("TRUNCATE TABLE CaughtCheatings")
     session.commit()
 
     # open file and skip the first line
-    f = open("./baseballdatabank/core/Parks.csv", "r")
+    f = open("./baseballdatabank/core/caughtCheatings.csv", "r")
     next(f)
 
     for line in f:
         # insert the team to the table
-        session.add(Park(line))
+        session.add(CaughtCheating(line))
 
     # commit changes and close the connection
     session.commit()
     session.close()
 
-initParksTable()
+initCaughtCheatingTable()
