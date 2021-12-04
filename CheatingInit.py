@@ -10,17 +10,15 @@ Base = declarative_base()
 
 class CaughtCheating(Base):
     __tablename__ = "CaughtCheating"
-    franchID = Column(String(3), primary_key=True)
-    franchName = Column(String(50))
-    active = Column(String(1))
-    NAassoc = Column(String(3))
+    teamID = Column(String(9), primary_key=True)
+    year = Column(Integer, primary_key=True)
+    description = Column(String(255))
 
     def __init__(self, line):
         data = line.split(",")
-        self.franchID = emptyStrNone(data[0])
-        self.franchName = emptyStrNone(data[1])
-        self.active = emptyStrNone(data[2])
-        self.NAassoc = emptyStrNone(data[3])
+        self.teamID = data[0]
+        self.year = data[1]
+        self.description = data[2]
 
 
 def initCaughtCheatingTable():
