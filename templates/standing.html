@@ -1,11 +1,12 @@
-<p>Search for "{{ year }}"</p>
+<h1>"{{ year }}" Standings</h1>
 
 <br/>
 <br/>
 
 {% for i in range(0, num) %}
 
-    <h1 style="color: darkmagenta">{{ headers[i] }}</h1>
+    <h2 style="color: darkmagenta">{{ headers[i] }}</h2>
+    <h3 style="color: blue">Winner: {{ tables[i][0][0] }}</h3>
 
         <table style="width: fit-content;">
             <div class="column" style="width: fit-content; float: left; margin: 10px">

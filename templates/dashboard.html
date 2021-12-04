@@ -1,4 +1,10 @@
 <h1>Welcome {{ username }}!</h1>
+<form action="/">
+    <p><input type="submit" value="Logout"/></p>
+</form>
+
+<br></br>
+
 <h2>Current Favorite Team: {{ favTeamName }}</h2>
 
 <form action="/changeFav" method="POST">

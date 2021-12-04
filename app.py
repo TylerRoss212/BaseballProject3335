@@ -130,32 +130,6 @@ def dashboard():
         params.append(username)
 
         try:
-            #Find favorite team
-            sql = "SELECT favoriteTeam FROM Users WHERE username = %s"
-            cur.execute(sql, params)
-            favSQL = cur.fetchall()
-
-            for team in favSQL:
-                favTeam = (team[0])
-
-
-            #Based on teamID, find teamName
-            tempNameParam.append(favTeam)
-            sql = "SELECT name FROM Teams WHERE teamID = %s GROUP BY name"
-            cur.execute(sql, tempNameParam)
-            tempNameSQL = cur.fetchall()
-
-            for team in tempNameSQL:
-                favTeamName = (team[0])
-
-
-            #Reestablish years list
-            sql = "SELECT year FROM Teams GROUP BY year DESC"
-            cur.execute(sql)
-            allYears = cur.fetchall()
-
-            for year in allYears:
-                    yearList.append(year[0])
 
             #Establish login for dashboard
             sql = "SELECT password FROM Users WHERE username = %s"
@@ -167,9 +141,35 @@ def dashboard():
             for row in results:
                 for col in row:
                     if(col == passMatch):
+
+                        #Find favorite team
+                        sql = "SELECT favoriteTeam FROM Users WHERE username = %s"
+                        cur.execute(sql, params)
+                        favSQL = cur.fetchall()
+
+                        for team in favSQL:
+                            favTeam = (team[0])
+
+
+                        #Based on teamID, find teamName
+                        tempNameParam.append(favTeam)
+                        sql = "SELECT name FROM Teams WHERE teamID = %s GROUP BY name"
+                        cur.execute(sql, tempNameParam)
+                        tempNameSQL = cur.fetchall()
+
+                        for team in tempNameSQL:
+                            favTeamName = (team[0])
+
+
+                        #Reestablish years list
+                        sql = "SELECT year FROM Teams GROUP BY year DESC"
+                        cur.execute(sql)
+                        allYears = cur.fetchall()
+
+                        for year in allYears:
+                                yearList.append(year[0])
+
                         return render_template('dashboard.html', username=username, teams=teamsList, years=yearList, favTeam=favTeam, favTeamName=favTeamName, password=password)
-                    else:
-                        return render_template('incorrectUserOrPass.html')
 
 
         except Exception:
@@ -178,6 +178,8 @@ def dashboard():
             raise
         else:
             con.commit()
+
+        return render_template('incorrectUserOrPass.html')
 
 #Roster standings
 @app.route('/standing', methods=['POST'])
