@@ -20,7 +20,8 @@ for row in res:
         myStr += ' '
 
     divWinners.append((row[0], row[2], row[3], row[4], row[5]))
-    #print(myStr)
+
+
 
 displayString = ""
 

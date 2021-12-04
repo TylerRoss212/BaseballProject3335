@@ -179,6 +179,46 @@ def dashboard():
         else:
             con.commit()
 
+#Roster standings
+@app.route('/standing', methods=['POST'])
+def standing():
+    print('1')
+    if request.method == 'POST':
+        print('2')
+        form_data = request.form
+        print('2')
+        #Fetch data from forms
+        year = form_data['years']
+        print('4')
+        params = []
+        params.append(year)
+
+        try:
+            #Execute roster fetch based on year and fav team
+            sql = "select teamid, name, lgId, divId, W, L from teams where year = %s and divWin = 'Y'"
+            cur.execute(sql, params)
+
+        except Exception:
+            con.rollback()
+            print("Database Exception")
+            raise
+
+        else:
+            con.commit()
+
+        #load results for render
+        res = cur.fetchall()
+        divWinners = []
+        for row in res:
+            myStr = ""
+            for col in row:
+                myStr += str(col)
+                myStr += ' '
+
+                divWinners.append((row[0], row[2], row[3], row[4], row[5]))
+
+        return render_template('standing.html', year=year, divWinners=divWinners)
+
 #Roster render
 @app.route('/roster', methods=['POST']) 
 def roster():
