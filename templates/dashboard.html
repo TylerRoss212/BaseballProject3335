@@ -60,6 +60,34 @@
 
 </div>
 
+<br/>
+<br/>
+
+<h2>Search for a batter by name</h2>
+<div>
+    <form action="/searchBatters" method="POST">
+        <label for="search">Search:</label>
+
+        <input type="text" name="search" id="search" placeholder="Enter a player's name">
+
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+
+<br/>
+<br/>
+
+<h2>Search for a pitcher by name</h2>
+<div>
+    <form action="/searchPitchers" method="POST">
+        <label for="search">Search:</label>
+
+        <input type="text" name="search" id="search" placeholder="Enter a player's name">
+
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+
 <script>
     function roster(year) {
         console.log(year);

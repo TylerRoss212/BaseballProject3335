@@ -197,7 +197,6 @@ def roster():
         try:
             #Execute roster fetch based on year and fav team
             sql = "SELECT CONCAT(nameFirst, ' ', nameLast) as name, CONCAT(birthCountry, ', ', birthState, ', ', birthCity) as birthPlace, CASE WHEN bs.AB IS NULL THEN 'N' WHEN bs.AB = 0 THEN 'N' ELSE 'Y' END as batting, CASE WHEN ps.G IS NULL THEN 'N' WHEN ps.G = 0 THEN 'N' ELSE 'Y' END as pitching, CASE WHEN COALESCE(EXTRACT(MONTH FROM deathDate), EXTRACT(MONTH FROM now())) - EXTRACT(MONTH FROM birthDate) < 0 THEN COALESCE(EXTRACT(YEAR FROM deathDate), EXTRACT(YEAR FROM now())) - EXTRACT(YEAR FROM birthDate) - 1 WHEN COALESCE(EXTRACT(MONTH FROM deathDate), EXTRACT(MONTH FROM now())) - EXTRACT(MONTH FROM birthDate) > 0 THEN COALESCE(EXTRACT(YEAR FROM deathDate), EXTRACT(YEAR FROM now())) - EXTRACT(YEAR FROM birthDate) ELSE CASE WHEN COALESCE(EXTRACT(DAY FROM deathDate), EXTRACT(DAY FROM now())) - EXTRACT(DAY FROM birthDate) >= 0 THEN COALESCE(EXTRACT(YEAR FROM deathDate), EXTRACT(YEAR FROM now())) - EXTRACT(YEAR FROM birthDate) ELSE COALESCE(EXTRACT(YEAR FROM deathDate), EXTRACT(YEAR FROM now())) - EXTRACT(YEAR FROM birthDate) - 1 END END AS Age FROM players p JOIN people USING (personid) LEFT JOIN battingstats bs USING (battingID) LEFT JOIN pitchingstats ps USING (pitchingID) WHERE p.year=%s AND p.teamid=%s"
-            print(sql)
             cur.execute(sql, params)
 
         except Exception:
@@ -214,4 +213,72 @@ def roster():
         for row in results:
             rosterList.append(row)
 
-        return render_template('roster.html', year=year, favTeam=favTeam, roster=rosterList)
+        return render_template('roster.html', year=year, favTeam=favTeam, rosterList=rosterList)
+
+@app.route('/searchBatters', methods=['POST'])
+def searchBatters():
+    if request.method == 'POST':
+        form_data = request.form
+
+        search = form_data['search']
+        search = "%" + search + "%"
+
+        #sql statement for the search
+        try:
+            sql = "SELECT CONCAT(nameFirst, ' ', nameLast), G, AB, R, H, twoB, threeB, HR, RBI, SB, CS, BB, SO, IBB, HBP, SH, SF, GIDP, year FROM people JOIN players USING(personID) JOIN battingstats USING(battingID) WHERE CONCAT(nameFirst, ' ', nameLast) LIKE %s"
+            print(sql)
+            cur.execute(sql, search)
+        
+        except Exception:
+            con.rollback()
+            print("Database Exception")
+            raise
+
+        else:
+            con.commit()
+
+        #load results for render
+        results = cur.fetchall()
+
+        searchList = []
+        for row in results:
+            searchList.append(row)
+
+        #change search back to normal
+        search = search.replace("%", "")
+
+        return render_template('searchBatters.html', search=search, searchList=searchList)
+
+@app.route('/searchPitchers', methods=['POST'])
+def searchPitchers():
+    if request.method == 'POST':
+        form_data = request.form
+
+        search = form_data['search']
+        search = "%" + search + "%"
+
+        #sql statement for the search
+        try:
+            sql = "SELECT CONCAT(nameFirst, ' ', nameLast), W, L, G, GS, CG, SHO, SV, IPouts, H, ER, HR, BB, SO, BAOpp, ERA, IBB, WP, HBP, BK, BFP, GF, R, SH, SF, GIDP, year FROM people JOIN players USING(personID) JOIN pitchingstats USING(pitchingID) WHERE CONCAT(nameFirst, ' ', nameLast) LIKE %s"
+            print(sql)
+            cur.execute(sql, search)
+        
+        except Exception:
+            con.rollback()
+            print("Database Exception")
+            raise
+
+        else:
+            con.commit()
+
+        #load results for render
+        results = cur.fetchall()
+
+        searchList = []
+        for row in results:
+            searchList.append(row)
+
+        #change search back to normal
+        search = search.replace("%", "")
+
+        return render_template('searchPitchers.html', search=search, searchList=searchList)
